@@ -24,8 +24,36 @@ php artisan make:model Todo -m
 php artisan make:controller TodosController --model=Todo --api 
 ```
 
+- Navigate to the created migration and add the following code to the up() method
+```php
+$table->increments('id');
+$table->string('task');
+$table->boolean('completed');
+$table->integer('user_id')->nullable();
+$table->timestamps();
+```
 
+- To create your tables, execute the following artisan command to run the migrations
+```php
+php artisan migrate
+```
 
-## Step 3 :
+## Step 3 : Define your relationships
+- go to the Todo model and define the relationship that deals with the owner of the task
+- we have a one to many relation: one Todo belongs to one User; One user has many Todos
+- The code below creates an owner relation in the Todo class
+```php
+public function owner()
+{
+    return $this->belongsTo(User::class);
+}
+```
+- The code below links a user to his Todos
+```php
+public function todos()
+{
+    return $this->hasMany(Todo::class);
+}
+```
 
 
