@@ -179,15 +179,16 @@ return response()->json(['message' => "User with id {$user->id} has been success
 
 ## Step 9 restful API Testing Using Postman
 - HTTP Methods that correspond to methods in your controllers 
-delete, put
+delete, put, post and get
 
-get - http://{-your domain-}/api/todos
-get - http://{-your domain-}/api/todos/1
-post - http://{-your domain-}/api/todos - pass it some body data -> json format
-delete - http://{-your domain-}/api/todos/1
+- get - http://{-your domain-}/api/todos
+- get - http://{-your domain-}/api/todos/1
+- post - http://{-your domain-}/api/todos - pass it some body data -> json format
+- delete - http://{-your domain-}/api/todos/1
 
 
-get - http://{-your domain-}/api/users
-get - http://{-your domain-}/api/users/1
-post - http://{-your domain-}/api/todos - pass it some body data -> json format
-delete - http://{-your domain-}/api/users/1
+- get - http://{-your domain-}/api/users
+- get - http://{-your domain-}/api/users/1
+- post - http://{-your domain-}/api/todos - pass it some body data -> json format
+- delete - http://{-your domain-}/api/users/1
+
