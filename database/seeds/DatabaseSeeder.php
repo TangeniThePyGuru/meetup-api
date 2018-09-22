@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // removes previously created data
+        \App\User::truncate();
+        \App\Todo::truncate();
+
+        // seeds the database
+        factory(\App\User::class, 20)->create();
+        factory(\App\Todo::class, 60)->create();
     }
 }

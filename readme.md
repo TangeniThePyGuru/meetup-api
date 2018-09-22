@@ -56,4 +56,39 @@ public function todos()
 }
 ```
 
+## Step 4 : Define Model factories
+- paste the following code into the TodoFactory created earlier
+```php
+$users = \App\User::all()->random(1)->pluck('id')->values();
 
+return [
+    'task' => $faker->sentence,
+    'completed' => $faker->boolean(),
+    'user_id' => $users[0]
+];
+```
+
+- Take note the UserFactory already comes predefined for you and ready to use, so no need to create it
+- It can be seen under the database/factories directory 
+
+## Seeding your database 
+- Laravel comes with many different ways to seed your database, 
+    - ranging from using laravel tinker, 
+    - or using the artisan command below
+    ```php
+      php artisan db:seed
+    ```
+- We will use tinker - tinker is a command line interface tool for manipulating the database
+- The below artisan command opens the tinker CLI
+```php
+php artisan tinker
+```
+- Within the tinker environment
+- Seed the user Table with 20 users
+```php
+factory(App\User::class, 20)->create()
+```
+- Seed the todo table with 40 Todos
+```php
+factory(App\Todo::class, 40)->create()
+```
