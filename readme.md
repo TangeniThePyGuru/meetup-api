@@ -10,10 +10,17 @@
 ## Basic Laravel Restful API
 - This application serves to demonstrate the basics of Laravel Restful Api in 10 minutes by creating a todo app
 
+
 ## Step 1 : Create The Todo Model
 - The artisan command below creates a model of the name Todo alongside a migration for the database schema
 ```php
 php artisan make:model Todo -m
+```
+
+- To solve the Mass Assignment Error
+- Add the following field at the top of your Todo model 
+```php
+protected $guarded = [];
 ```
 
 
@@ -34,15 +41,17 @@ php artisan make:controller UsersController  --model=User --api
 ```php
 $table->increments('id');
 $table->string('task');
-$table->boolean('completed');
+$table->boolean('completed')->default('0');
 $table->integer('user_id')->nullable();
 $table->timestamps();
 ```
 
+- Take note that the users migration has been created for your already
 - To create your tables, execute the following artisan command to run the migrations
 ```php
 php artisan migrate
 ```
+
 
 ## Step 5 : Define your relationships
 - go to the Todo model and define the relationship that deals with the owner of the task
@@ -123,7 +132,7 @@ return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id)
 ```php
 $todo = Todo::create([
     'task' => $request->task,
-    'completed' => $request->completed,
+    'completed' => $request->completed ? $request->completed : 0,
     'user_id' => User::all()->random(1)->pluck('id')[0]
 ]);
 
@@ -169,13 +178,16 @@ return response()->json(['message' => "User with id {$user->id} has been success
 
 
 ## Step 9 restful API Testing Using Postman
-- http://{-your domain-}/api/todos
-- http://{-your domain-}/api/todos/1
-- http://{-your domain-}/api/users
-- http://{-your domain-}/api/users/1
+- HTTP Methods that correspond to methods in your controllers 
+delete, put
 
-## Step 10 Solving the Mass Assignment Error
-- Add the following field at the top of each of your Todo model 
-```php
-protected $guarded = [];
-```
+get - http://{-your domain-}/api/todos
+get - http://{-your domain-}/api/todos/1
+post - http://{-your domain-}/api/todos - pass it some body data -> json format
+delete - http://{-your domain-}/api/todos/1
+
+
+get - http://{-your domain-}/api/users
+get - http://{-your domain-}/api/users/1
+post - http://{-your domain-}/api/todos - pass it some body data -> json format
+delete - http://{-your domain-}/api/users/1
