@@ -108,13 +108,14 @@ factory(App\User::class, 20)->create()
 factory(App\Todo::class, 40)->create()
 ```
 
-## Step 7 : Api Routes
+## Step 8 : Api Routes
 - Add the following code to your API routes
 ```php
 Route::resource('todos', 'TodosController');
+Route::resource('users', 'UsersController');
 ```
 
-## Step 8 : controller implementation
+## Step 9 : controller implementation
 
 ### TodosController
 
@@ -200,7 +201,7 @@ $user->save();
 return response()->json($user);
 ```
 
-## Step 9 restful API Testing Using Postman
+## Step 10 restful API Testing Using Postman
 - HTTP Methods that correspond to methods in your controllers 
 delete, put, post and get
 
