@@ -56,7 +56,15 @@ class TodosController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
-        //
+        if ($request->task)
+            $todo->task = $request->task;
+        if ($request->completed)
+            $todo->completed = $request->completed;
+
+        $todo->save();
+
+        return response()->json($todo);
+
     }
 
     /**

@@ -116,7 +116,7 @@ Route::resource('todos', 'TodosController');
 
 ## Step 8 : controller implementation
 
-TodosController
+# TodosController
 
 - Add the following code to your index method in the TodosController
 ```php
@@ -146,7 +146,19 @@ $todo->delete();
 return response()->json(['message' => "Todo with id {$todo->id} has been successfully deleted"]);
 ```
 
-UsersController
+-- Add the following code to the update method
+```php
+if ($request->task)
+    $todo->task = $request->task;
+if ($request->completed)
+    $todo->completed = $request->completed;
+
+$todo->save();
+
+return response()->json($todo);
+```
+
+# UsersController
 
 - Add the following code to your index method in the UsersController
 ```php
@@ -176,6 +188,17 @@ $user->delete();
 return response()->json(['message' => "User with id {$user->id} has been successfully deleted"]);
 ```
 
+- Add the following code to the update method
+```php
+if ($request->name)
+    $user->name = $request->name;
+if ($request->email)
+    $user->email = $request->email;
+
+$user->save();
+
+return response()->json($user);
+```
 
 ## Step 9 restful API Testing Using Postman
 - HTTP Methods that correspond to methods in your controllers 
@@ -184,11 +207,19 @@ delete, put, post and get
 - get - http://{-your domain-}/api/todos
 - get - http://{-your domain-}/api/todos/1
 - post - http://{-your domain-}/api/todos - pass it some body data -> json format
+        task: Upload app to github
+        
 - delete - http://{-your domain-}/api/todos/1
-
-
+- put - http://{-your domain-}/api/todos/1 - pass it some body data -> ensure that you use the x-www-form-urlencoded data
+        task: Test this api
+        completed: 1
+        
 - get - http://{-your domain-}/api/users
 - get - http://{-your domain-}/api/users/1
 - post - http://{-your domain-}/api/todos - pass it some body data -> json format
+        name: Laravel Namibia
+        email: laranamibia@gmail.com
 - delete - http://{-your domain-}/api/users/1
-
+- put - http://{-your domain-}/api/todos/1 - pass it some body data -> ensure that you use the x-www-form-urlencoded data
+        name: Laravel SA
+        email: larasa@gmail.com

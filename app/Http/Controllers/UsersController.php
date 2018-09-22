@@ -54,7 +54,14 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if ($request->name)
+            $user->name = $request->name;
+        if ($request->email)
+            $user->email = $request->email;
+
+        $user->save();
+
+        return response()->json($user);
     }
 
     /**
