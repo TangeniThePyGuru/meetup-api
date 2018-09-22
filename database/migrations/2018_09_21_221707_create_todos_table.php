@@ -16,7 +16,7 @@ class CreateTodosTable extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('task');
-            $table->boolean('completed');
+            $table->boolean('completed')->default('0');
             $table->integer('user_id')->nullable();
             $table->timestamps();
         });

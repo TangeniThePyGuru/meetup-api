@@ -29,7 +29,7 @@ class TodosController extends Controller
     {
         $todo = Todo::create([
             'task' => $request->task,
-            'completed' => $request->completed,
+            'completed' => $request->completed ? $request->completed : 0,
             'user_id' => User::all()->random(1)->pluck('id')[0]
         ]);
 
