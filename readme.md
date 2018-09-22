@@ -207,19 +207,28 @@ delete, put, post and get
 - get - http://{-your domain-}/api/todos
 - get - http://{-your domain-}/api/todos/1
 - post - http://{-your domain-}/api/todos - pass it some body data -> json format
-        task: Upload app to github
+```php
+task: Upload app to github
+```
         
 - delete - http://{-your domain-}/api/todos/1
 - put - http://{-your domain-}/api/todos/1 - pass it some body data -> ensure that you use the x-www-form-urlencoded data
-        task: Test this api
-        completed: 1
+```php
+task: Test this api
+completed: 1
+```        
         
 - get - http://{-your domain-}/api/users
 - get - http://{-your domain-}/api/users/1
 - post - http://{-your domain-}/api/todos - pass it some body data -> json format
-        name: Laravel Namibia
-        email: laranamibia@gmail.com
+```php
+name: Laravel Namibia
+email: laranamibia@gmail.com
+```
+
 - delete - http://{-your domain-}/api/users/1
 - put - http://{-your domain-}/api/todos/1 - pass it some body data -> ensure that you use the x-www-form-urlencoded data
-        name: Laravel SA
-        email: larasa@gmail.com
+```php
+name: Laravel SA
+email: larasa@gmail.com
+```
