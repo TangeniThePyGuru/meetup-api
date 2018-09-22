@@ -67,6 +67,8 @@ class TodosController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+
+        return response()->json(['message' => "Todo with id {$todo->id} has been successfully deleted"]);
     }
 }

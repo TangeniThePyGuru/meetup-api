@@ -128,6 +128,14 @@ $todo = Todo::create([
 ]);
 
 return response()->json(['message' => 'Todo successfully created']);
+```
+
+-- Add the following code into your destroy method
+```php
+$todo->delete();
+
+return response()->json(['message' => "Todo with id {$todo->id} has been successfully deleted"]);
+```
 
 UsersController
 
@@ -151,6 +159,14 @@ $todo = User::create([
 
 return response()->json(['message' => 'User successfully created']);
 ```
+
+- Add the following code to your destroy method
+```php
+$user->delete();
+
+return response()->json(['message' => "User with id {$user->id} has been successfully deleted"]);
+```
+
 
 ## Step 9 restful API Testing Using Postman
 - http://{-your domain-}/api/todos
