@@ -120,12 +120,12 @@ Route::resource('todos', 'TodosController');
 
 - Add the following code to your index method in the TodosController
 ```php
-return response()->json(Todo::all(), 200);
+return response()->json(Todo::all());
 ```
 
 - Add the following code to your show method in the TodosController
 ```php
-return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id), 200);
+return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id));
 ```
 
 - Add the following code into your store method
@@ -162,12 +162,12 @@ return response()->json($todo);
 
 - Add the following code to your index method in the UsersController
 ```php
-return response()->json(User::all()->first()->with('todos')->get(), 200);
+return response()->json(User::all()->first()->with('todos')->get());
 ```
 
 - Add the following code to your show method in the UsersController
 ```php
-return response()->json($user->with('todos')->get()->where('id', '=', $user->id), 200);
+return response()->json($user->with('todos')->get()->where('id', '=', $user->id));
 ```
 
 - Add the following code into your store method

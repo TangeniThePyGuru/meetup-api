@@ -16,7 +16,7 @@ class TodosController extends Controller
     public function index()
     {
         $todo = Todo::first();
-        return response()->json($todo->with('owner')->get(), 200);
+        return response()->json($todo->with('owner')->get());
     }
 
     /**
@@ -44,7 +44,7 @@ class TodosController extends Controller
      */
     public function show(Todo $todo)
     {
-        return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id), 200);
+        return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id));
     }
 
     /**

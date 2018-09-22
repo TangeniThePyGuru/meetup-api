@@ -14,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return response()->json(User::all()->first()->with('todos')->get(), 200);
+        return response()->json(User::all()->first()->with('todos')->get());
     }
 
     /**
@@ -42,7 +42,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json($user->with('todos')->get()->where('id', '=', $user->id), 200);
+        return response()->json($user->with('todos')->get()->where('id', '=', $user->id));
     }
 
     /**
