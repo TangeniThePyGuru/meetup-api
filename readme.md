@@ -139,14 +139,14 @@ $todo = Todo::create([
 return response()->json(['message' => 'Todo successfully created']);
 ```
 
--- Add the following code into your destroy method
+- Add the following code into your destroy method
 ```php
 $todo->delete();
 
 return response()->json(['message' => "Todo with id {$todo->id} has been successfully deleted"]);
 ```
 
--- Add the following code to the update method
+- Add the following code to the update method
 ```php
 if ($request->task)
     $todo->task = $request->task;
