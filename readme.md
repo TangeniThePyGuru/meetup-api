@@ -92,3 +92,9 @@ factory(App\User::class, 20)->create()
 ```php
 factory(App\Todo::class, 40)->create()
 ```
+
+## Api Routes
+- Add the following code to your API routes
+```php
+Route::resource('todos', 'TodosController');
+```
