@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Todo;
+use App\User;
 use Illuminate\Http\Request;
 
 class TodosController extends Controller
@@ -26,7 +27,13 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $todo = Todo::create([
+            'task' => $request->task,
+            'completed' => $request->completed,
+            'user_id' => User::all()->random(1)->pluck('id')[0]
+        ]);
+
+        return response()->json(['message' => 'Todo successfully created']);
     }
 
     /**

@@ -106,6 +106,9 @@ Route::resource('todos', 'TodosController');
 ```
 
 ## Step 8 : controller implementation
+
+TodosController
+
 - Add the following code to your index method in the TodosController
 ```php
 return response()->json(Todo::all(), 200);
@@ -115,6 +118,18 @@ return response()->json(Todo::all(), 200);
 ```php
 return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id), 200);
 ```
+
+- Add the following code into your store method
+```php
+$todo = Todo::create([
+    'task' => $request->task,
+    'completed' => $request->completed,
+    'user_id' => User::all()->random(1)->pluck('id')[0]
+]);
+
+return response()->json(['message' => 'Todo successfully created']);
+
+UsersController
 
 - Add the following code to your index method in the UsersController
 ```php
@@ -126,8 +141,25 @@ return response()->json(User::all()->first()->with('todos')->get(), 200);
 return response()->json($user->with('todos')->get()->where('id', '=', $user->id), 200);
 ```
 
-## Restful API Testing Using Postman
+- Add the following code into your store method
+```php
+$todo = User::create([
+    'name' => $request->name,
+    'email' => $request->email,
+    'password' => bcrypt('secret')
+]);
+
+return response()->json(['message' => 'User successfully created']);
+```
+
+## Step 9 restful API Testing Using Postman
 - http://{-your domain-}/api/todos
 - http://{-your domain-}/api/todos/1
 - http://{-your domain-}/api/users
 - http://{-your domain-}/api/users/1
+
+## Step 10 Solving the Mass Assignment Error
+- Add the following field at the top of each of your Todo model 
+```php
+protected $guarded = [];
+```

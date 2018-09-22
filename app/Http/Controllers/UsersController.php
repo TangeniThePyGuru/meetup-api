@@ -25,7 +25,13 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $todo = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt('secret')
+        ]);
+
+        return response()->json(['message' => 'User successfully created']);
     }
 
     /**
