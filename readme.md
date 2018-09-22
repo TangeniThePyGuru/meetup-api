@@ -116,7 +116,7 @@ Route::resource('todos', 'TodosController');
 
 ## Step 8 : controller implementation
 
-# TodosController
+### TodosController
 
 - Add the following code to your index method in the TodosController
 ```php
@@ -158,7 +158,7 @@ $todo->save();
 return response()->json($todo);
 ```
 
-# UsersController
+### UsersController
 
 - Add the following code to your index method in the UsersController
 ```php
