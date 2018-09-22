@@ -17,13 +17,19 @@ php artisan make:model Todo -m
 ```
 
 
-## Step 2 : Create the migration for the model
+## Step 2 : Create the controllers
 - The artisan command below crerats a controller of the name TodosController and binds it to the Todo model
 - The --api parameter adds the methods that a generally used in an api to the created controller
 ```php
 php artisan make:controller TodosController --model=Todo --api 
 ```
 
+- Creates the User Controller
+```php
+php artisan make:controller UsersController  --model=User --api
+```
+
+## Step 4 : Create the migration for the Todo model
 - Navigate to the created migration and add the following code to the up() method
 ```php
 $table->increments('id');
@@ -38,14 +44,14 @@ $table->timestamps();
 php artisan migrate
 ```
 
-## Step 3 : Define your relationships
+## Step 5 : Define your relationships
 - go to the Todo model and define the relationship that deals with the owner of the task
 - we have a one to many relation: one Todo belongs to one User; One user has many Todos
 - The code below creates an owner relation in the Todo class
 ```php
 public function owner()
 {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class, 'user_id');
 }
 ```
 - The code below links a user to his Todos
@@ -56,7 +62,7 @@ public function todos()
 }
 ```
 
-## Step 4 : Define Model factories
+## Step 6 : Define Model factories
 - paste the following code into the TodoFactory created earlier
 ```php
 $users = \App\User::all()->random(1)->pluck('id')->values();
@@ -71,30 +77,57 @@ return [
 - Take note the UserFactory already comes predefined for you and ready to use, so no need to create it
 - It can be seen under the database/factories directory 
 
-## Seeding your database 
-- Laravel comes with many different ways to seed your database, 
-    - ranging from using laravel tinker, 
+## Step 7 : Seeding your database 
+- Laravel comes with many different approaches to seed your database, 
+    - ranging from laravel tinker, 
     - or using the artisan command below
     ```php
       php artisan db:seed
     ```
-- We will use tinker - tinker is a command line interface tool for manipulating the database
+- We will use tinker - is a command line interface tool for manipulating the database
 - The below artisan command opens the tinker CLI
 ```php
 php artisan tinker
 ```
 - Within the tinker environment
-- Seed the user Table with 20 users
+- Seed the user table with as many rows of data as you want in this case 20 users
 ```php
 factory(App\User::class, 20)->create()
 ```
-- Seed the todo table with 40 Todos
+- Seed the todo table with 40 rows of data
 ```php
 factory(App\Todo::class, 40)->create()
 ```
 
-## Api Routes
+## Step 7 : Api Routes
 - Add the following code to your API routes
 ```php
 Route::resource('todos', 'TodosController');
 ```
+
+## Step 8 : controller implementation
+- Add the following code to your index method in the TodosController
+```php
+return response()->json(Todo::all(), 200);
+```
+
+- Add the following code to your show method in the TodosController
+```php
+return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id), 200);
+```
+
+- Add the following code to your index method in the UsersController
+```php
+return response()->json(User::all()->first()->with('todos')->get(), 200);
+```
+
+- Add the following code to your show method in the UsersController
+```php
+return response()->json($user->with('todos')->get()->where('id', '=', $user->id), 200);
+```
+
+## Restful API Testing Using Postman
+- http://{-your domain-}/api/todos
+- http://{-your domain-}/api/todos/1
+- http://{-your domain-}/api/users
+- http://{-your domain-}/api/users/1

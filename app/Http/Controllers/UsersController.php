@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Todo;
+use App\User;
 use Illuminate\Http\Request;
 
-class TodosController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class TodosController extends Controller
      */
     public function index()
     {
-        $todo = Todo::first();
-        return response()->json($todo->with('owner')->get(), 200);
+        return response()->json(User::all()->first()->with('todos')->get(), 200);
     }
 
     /**
@@ -32,22 +31,22 @@ class TodosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Todo  $todo
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Todo $todo)
+    public function show(User $user)
     {
-        return response()->json($todo->with('owner')->get()->where('id', '=', $todo->id), 200);
+        return response()->json($user->with('todos')->get()->where('id', '=', $user->id), 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Todo  $todo
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -55,10 +54,10 @@ class TodosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Todo  $todo
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy(User $user)
     {
         //
     }
